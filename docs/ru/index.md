@@ -17,7 +17,8 @@ hero:
       text: GitHub
       link: https://github.com/vuejs/vitepress
   image:
-    src: /vitepress-logo-large.svg
+    light: /vitepress-logo-large-light.svg
+    dark: /vitepress-logo-large-dark.svg
     alt: VitePress
 
 features:
