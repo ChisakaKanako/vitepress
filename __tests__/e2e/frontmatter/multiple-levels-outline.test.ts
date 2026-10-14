@@ -33,4 +33,23 @@ describe('outline', () => {
       '#h4-3'
     ])
   })
+
+  test.each([375, 1187])(
+    'closes the local outline after clicking heading text at %ipx',
+    async (width) => {
+      await page.setViewportSize({ width, height: 883 })
+      await goto('/frontmatter/multiple-levels-outline')
+      const dropdown = page.locator('.VPLocalNavOutlineDropdown')
+      await dropdown.locator('button').click()
+      await dropdown.locator('a[href="#h2-2"] bdi').click()
+      await page.waitForURL('**#h2-2')
+      await page.waitForSelector('.VPLocalNavOutlineDropdown .items', {
+        state: 'detached'
+      })
+      expect(
+        await dropdown.locator('button').getAttribute('aria-expanded')
+      ).toBe('false')
+      await page.setViewportSize({ width: 1280, height: 720 })
+    }
+  )
 })
